@@ -3,11 +3,7 @@ import streamlit as st
 import base64
 from streamlit.runtime.scriptrunner import get_script_run_ctx
 import datetime
-from dotenv import load_dotenv
 from utils.chain import chat, clear_memory  # ✅ Import from your reusable module
-
-# Load .env variables (if needed in chain.py)
-load_dotenv()
 
 def main():
     st.set_page_config(page_title="Faber", page_icon="assets/chatbotlogocropped.png")
