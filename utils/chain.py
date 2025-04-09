@@ -9,7 +9,7 @@ load_dotenv()
 bedrock_agent_runtime = boto3.client(
     'bedrock-agent-runtime',
     region_name='us-west-2',
-    aws_access_key_id = st.secrets["AWS_ACCESS_KEY_ID"]
+    aws_access_key_id = st.secrets["AWS_ACCESS_KEY_ID"],
     aws_secret_access_key = st.secrets["AWS_SECRET_ACCESS_KEY"]
 )
 
