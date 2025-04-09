@@ -1,6 +1,6 @@
 import os
 import boto3
-from dotenv import load_dotenv
+import streamlit as st
 
 # Load environment variables
 load_dotenv()
@@ -9,11 +9,11 @@ load_dotenv()
 bedrock_agent_runtime = boto3.client(
     'bedrock-agent-runtime',
     region_name='us-west-2',
-    aws_access_key_id=os.getenv('AWS_ACCESS_KEY_ID'),
-    aws_secret_access_key=os.getenv('AWS_SECRET_ACCESS_KEY')
+    aws_access_key_id = st.secrets["AWS_ACCESS_KEY_ID"]
+    aws_secret_access_key = st.secrets["AWS_SECRET_ACCESS_KEY"]
 )
 
-KNOWLEDGE_BASE_ID=os.getenv('KNOWLEDGE_BASE_ID')
+KNOWLEDGE_BASE_ID = st.secrets["BEDROCK_KNOWLEDGE_BASE_ID"]
 MODEL_ARN = "arn:aws:bedrock:us-west-2::foundation-model/anthropic.claude-3-sonnet-20240229-v1:0"
 
 
