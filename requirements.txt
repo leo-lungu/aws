@@ -2,3 +2,4 @@ streamlit
 boto3
 Pillow
 requests
+streamlit-survey
