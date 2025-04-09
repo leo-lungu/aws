@@ -2,8 +2,6 @@ import os
 import boto3
 import streamlit as st
 
-# Load environment variables
-load_dotenv()
 
 # Initialize Bedrock Agent Runtime client
 bedrock_agent_runtime = boto3.client(
