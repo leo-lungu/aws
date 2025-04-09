@@ -13,7 +13,6 @@ bedrock_agent_runtime = boto3.client(
     aws_secret_access_key = st.secrets["AWS_SECRET_ACCESS_KEY"]
 )
 
-KNOWLEDGE_BASE_ID = st.secrets["BEDROCK_KNOWLEDGE_BASE_ID"]
 MODEL_ARN = "arn:aws:bedrock:us-west-2::foundation-model/anthropic.claude-3-sonnet-20240229-v1:0"
 
 
@@ -21,6 +20,7 @@ def chat(question: str):
     """
     Query AWS Bedrock KB and return a formatted response.
     """
+    KNOWLEDGE_BASE_ID = st.secrets["BEDROCK_KNOWLEDGE_BASE_ID"]
     try:
         response = bedrock_agent_runtime.retrieve_and_generate(
             input={'text': question},
