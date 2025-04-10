@@ -14,14 +14,27 @@ bedrock_agent_runtime = boto3.client(
 MODEL_ARN = "arn:aws:bedrock:us-west-2::foundation-model/anthropic.claude-3-sonnet-20240229-v1:0"
 
 
+chat_history = []
+
 def chat(question: str):
     """
-    Query AWS Bedrock KB and return a formatted response.
+    Query AWS Bedrock KB and return a formatted response, maintaining context.
     """
     KNOWLEDGE_BASE_ID = st.secrets["BEDROCK_KNOWLEDGE_BASE_ID"]
+    global chat_history
+
     try:
+        # Add user's new question to the history
+        chat_history.append({"role": "user", "content": question})
+
+        # Combine messages into a single text block for context
+        context_text = "\n".join(
+            [f"{m['role'].capitalize()}: {m['content']}" for m in chat_history]
+        )
+
+        # Send the entire context to the model
         response = bedrock_agent_runtime.retrieve_and_generate(
-            input={'text': question},
+            input={'text': context_text},
             retrieveAndGenerateConfiguration={
                 'knowledgeBaseConfiguration': {
                     'knowledgeBaseId': KNOWLEDGE_BASE_ID,
@@ -31,10 +44,17 @@ def chat(question: str):
             }
         )
 
-        return format_response_with_references(response)
+        # Extract and format assistant response
+        formatted_response = format_response_with_references(response)
+
+        # Add the assistant's reply to history
+        chat_history.append({"role": "assistant", "content": formatted_response})
+
+        return formatted_response
 
     except Exception as e:
         return f"❌ An error occurred while generating a response: {str(e)}"
+
 
 
 def format_response_with_references(response):
@@ -71,5 +91,6 @@ def format_response_with_references(response):
 
 
 def clear_memory():
-    # Placeholder 
-    pass
+    global chat_history
+    chat_history = []
+
