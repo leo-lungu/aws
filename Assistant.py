@@ -6,7 +6,7 @@ import datetime
 from utils.chain import chat, clear_memory 
 
 def main():
-    st.set_page_config(page_title="Faber", page_icon="assets/chatbotlogocropped.png")
+    st.set_page_config(page_title="GES D&C Chat", page_icon="assets/chatbotlogocropped.png")
     LOGO_IMAGE = "assets/chatbotlogocropped.png"
 
     # --- UI: Logo and branding ---
@@ -44,7 +44,7 @@ def main():
         <div class="container">
             <img class="logo-img" width="177" height="170" 
                 src="data:image/png;base64,{base64.b64encode(open(LOGO_IMAGE, "rb").read()).decode()}">
-            <p class="logo-text">Faber</p>
+            <p class="logo-text">GES D&C Chat</p>
             <p class="slogan">Unifying Answers, Empowering Users</p>
         </div>
     """, unsafe_allow_html=True)
