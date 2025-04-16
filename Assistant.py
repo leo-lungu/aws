@@ -50,7 +50,7 @@ def main():
     """, unsafe_allow_html=True)
 
     # --- Session state for storing messages ---
-    iif "initialized" not in st.session_state:
+    if "initialized" not in st.session_state:
         st.session_state.initialized = True
         st.session_state.messages = [{"role": "assistant", "content": "Hi there! 🤖 Ask me anything"}]
         clear_memory()
