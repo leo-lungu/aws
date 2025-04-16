@@ -50,8 +50,10 @@ def main():
     """, unsafe_allow_html=True)
 
     # --- Session state for storing messages ---
-    if "messages" not in st.session_state:
+    iif "initialized" not in st.session_state:
+        st.session_state.initialized = True
         st.session_state.messages = [{"role": "assistant", "content": "Hi there! 🤖 Ask me anything"}]
+        clear_memory()
 
     # --- Display chat history ---
     for message in st.session_state.messages:
